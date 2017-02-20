@@ -29,6 +29,22 @@ import Actions from 'actions';
 import Stores from 'stores';
 
 export default class App extends Component {
+    _onStoreChange() {
+        let { products, filters, appliedFilters } = Stores.getState();
+
+        this.setState({ products, filters, appliedFilters });
+    }
+    _getFilteredProducts() {
+        const { products, appliedFilters } = this.state;
+
+        if (appliedFilters.length) {
+            return products.filter((product, idx) => {
+                return (appliedFilters.indexOf(product.cat) >= 0);
+            });
+        } else {
+            return products;
+        }
+    }
     constructor(props) {
         super(props);
 
@@ -40,20 +56,14 @@ export default class App extends Component {
         this.unSubscribe = null;
 
         // Binding this to class methods.
-        this.onStoreChange = this.onStoreChange.bind(this);
-    }
-    onStoreChange() {
-        let { products = [], filters = [], appliedFilters = [] } = Stores.getState();
-
-        this.setState({ products, filters, appliedFilters });
+        this._onStoreChange = this._onStoreChange.bind(this);
+        this._getFilteredProducts = this._getFilteredProducts.bind(this);
     }
     componentWillMount() {
         // Make a AJAX call to the server to get data.
         Actions.getProductData();
     }
     render() {
-        console.log("this.state: ", this.state)
-        var filteredProducts = [];
         return (
             <div>
                 <Header />
@@ -62,7 +72,7 @@ export default class App extends Component {
                     appliedFilters = { this.state.appliedFilters }
                 />
                 <Content
-                    products = { filteredProducts }
+                    products = { this._getFilteredProducts() }
                 />
                 <Footer />
             </div>
@@ -70,7 +80,7 @@ export default class App extends Component {
     }
     componentDidMount() {
         // Subscribe for any changes in store.
-        this.unSubscribe = Stores.subscribe(this.onStoreChange)
+        this.unSubscribe = Stores.subscribe(this._onStoreChange)
     }
     componentWillUnmount() {
         if (this.unSubscribe) {

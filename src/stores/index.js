@@ -1,6 +1,12 @@
 import { createStore } from 'redux';
 
-const products = (state = {}, action) => {
+let defaultState = {
+    products: [],
+    filters: [],
+    appliedFilters: []
+};
+
+const products = (state = defaultState, action) => {
     switch (action.type) {
         case 'GET_PRODUCT_DATA_S': // GET_PRODUCT_DATA_SUCCESS - On getting product data success.
             // Loop through the products and get filter list.
