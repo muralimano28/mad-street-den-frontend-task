@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import App from 'containers/app';
+import App from 'containers';
 
 render(
     <App />,
@@ -9,8 +9,8 @@ render(
 );
 
 if (module.hot) {
-    module.hot.accept('containers/app', () => {
-        const NewRoot = require('containers/app').default;
+    module.hot.accept('containers', () => {
+        const NewRoot = require('containers').default;
 
         render(
             <NewRoot />,

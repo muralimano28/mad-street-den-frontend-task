@@ -95,7 +95,7 @@ module.exports = {
                         options: {
                             cacheDirectory: true,
                             presets: ['es2015', 'react'],
-                            plugins: ['transform-runtime']
+                            plugins: ['transform-object-rest-spread', 'transform-runtime']
                         }
                     }
                 ]
