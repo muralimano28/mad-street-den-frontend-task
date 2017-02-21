@@ -11,8 +11,8 @@ import React, { Component } from 'react';
  */
 
 import Header from './header';
-import Sidebar from './sidebar';
-import Content from './content';
+import Sidebar from 'containers/sidebar';
+import Content from 'containers/main-content';
 import Footer from './footer';
 
 /*
@@ -48,11 +48,9 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            products: [],
-            filters: [],
-            appliedFilters: []
-        };
+        let { products, filters, appliedFilters, noOfItemsToShow } = Stores.getState();
+        this.state = { products, filters, appliedFilters, noOfItemsToShow };
+
         this.unSubscribe = null;
 
         // Binding this to class methods.
@@ -64,15 +62,17 @@ export default class App extends Component {
         Actions.getProductData();
     }
     render() {
+        let { filters, appliedFilters, noOfItemsToShow } = this.state;
         return (
             <div>
                 <Header />
                 <Sidebar
-                    filters = { this.state.filters }
-                    appliedFilters = { this.state.appliedFilters }
+                    filters = { filters }
+                    appliedFilters = { appliedFilters }
                 />
                 <Content
                     products = { this._getFilteredProducts() }
+                    noOfItemsToShow = { noOfItemsToShow }
                 />
                 <Footer />
             </div>

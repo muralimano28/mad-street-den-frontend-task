@@ -3,10 +3,14 @@ import { createStore } from 'redux';
 let defaultState = {
     products: [],
     filters: [],
-    appliedFilters: []
+    appliedFilters: [],
+    noOfItemsToShow: 9
 };
 
 const products = (state = defaultState, action) => {
+    let { appliedFilters } = state;
+    let idx = -1;
+
     switch (action.type) {
         case 'GET_PRODUCT_DATA_S': // GET_PRODUCT_DATA_SUCCESS - On getting product data success.
             // Loop through the products and get filter list.
@@ -27,6 +31,26 @@ const products = (state = defaultState, action) => {
             };
         case 'GET_PRODUCT_DATA_E': // GET_PRODUCT_DATA_ERROR - On getting product data error.
             return state;
+        case 'ADD_FILTER':
+            return {
+                ...state,
+                appliedFilters: [...appliedFilters, action.value]
+            };
+        case 'REMOVE_FILTER':
+            idx = appliedFilters.indexOf(action.value);
+
+            return {
+                ...state,
+                appliedFilters: [
+                    ...appliedFilters.slice(0, idx),
+                    ...appliedFilters.slice(idx + 1)
+                ]
+            };
+        case 'CLEAR_ALL_FILTERS':
+            return {
+                ...state,
+                appliedFilters: []
+            };
         default:
             return state;
     }
