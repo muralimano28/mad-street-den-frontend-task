@@ -103,6 +103,7 @@
         box-shadow: 0 2px 34px -4px rgba(0,0,0,.7);
         display: block;
         background: #FFFFFF;
+        z-index: 3;
     }
     .filter-container .mobile-btns > div {
         display: inline-block;

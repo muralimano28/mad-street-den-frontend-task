@@ -1,0 +1,46 @@
+.card {
+    font-size: 1rem; /* 16px */
+    max-width: 19rem; /* 304px */
+    width: 19rem;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    text-align: center;
+    margin: 1em 0.5em;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px -1px rgba(0,0,0,.4);
+}
+.card .img-wrapper,
+.card .details {
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 49%;
+}
+.card .img-wrapper .img {
+    width: 8em; /* 128px */
+    height: 11.25em; /* 180px */
+    margin: 0 0.5em 0 1em;
+    position: absolute;
+    bottom: 1em;
+    box-shadow: 0 2px 34px -4px rgba(0,0,0,.7);
+}
+.card .details {
+    text-align: left;
+    padding: 0 0 0 0.5em;
+}
+.card .details h3 {
+    text-transform: capitalize;
+    margin: 1em 0 0;
+    font-size: 1em;
+    line-height: 1.125em;
+}
+.card:hover .details h3 {
+    color: #2874f0;
+}
+.card .details .sub {
+    color: #999999;
+    margin: 0.5em 0;
+    font-size: 0.875em; /* 14px */
+    text-transform: capitalize;
+}
