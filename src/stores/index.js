@@ -8,7 +8,7 @@ let defaultState = {
 };
 
 const products = (state = defaultState, action) => {
-    let { appliedFilters } = state;
+    let { appliedFilters, noOfItemsToShow, products } = state;
     let idx = -1;
 
     switch (action.type) {
@@ -51,6 +51,11 @@ const products = (state = defaultState, action) => {
                 ...state,
                 appliedFilters: []
             };
+        case 'LOAD_MORE_PRODUCTS':
+            return {
+                ...state,
+                noOfItemsToShow: noOfItemsToShow + 9
+            }
         default:
             return state;
     }

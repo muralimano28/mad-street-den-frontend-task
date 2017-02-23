@@ -15,12 +15,16 @@ export default ({ data }) => {
             </div>
             <div className="details">
                 <h3>{ data.name }</h3>
-                <p className="sub">{ data.cat }</p>
-                <p>{ Number((data.score*10)%5).toFixed(2) }</p>
-                <div>
-                    <button type="button">Add to cart</button>
-                    <p>{ data.price }</p>
+                <div className="sub">{ data.cat }</div>
+                <div className="score">
+                    <span>{ Number((data.score*10)%5).toFixed(2) }</span>
+                    <img src="assets/images/rate-star-button.svg" alt="rate-star-icon" />
                 </div>
+                <div className="price">
+                    &#8377;
+                    { data.price }
+                </div>
+                <button type="button" className="buy-btn">Add to cart</button>
             </div>
         </div>
     );

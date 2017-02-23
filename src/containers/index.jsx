@@ -16,6 +16,12 @@ import Content from 'containers/main-content';
 import Footer from './footer';
 
 /*
+ * Components
+ */
+
+import Loader from 'components/loader';
+
+/*
  * Importing default styles which is required for whole app.
  */
 
@@ -30,9 +36,7 @@ import Stores from 'stores';
 
 export default class App extends Component {
     _onStoreChange() {
-        let { products, filters, appliedFilters } = Stores.getState();
-
-        this.setState({ products, filters, appliedFilters });
+        this.setState(Stores.getState());
     }
     _getFilteredProducts() {
         const { products, appliedFilters } = this.state;
@@ -45,11 +49,15 @@ export default class App extends Component {
             return products;
         }
     }
+    loadMoreProducts() {
+        Stores.dispatch({
+            type: 'LOAD_MORE_PRODUCTS'
+        });
+    }
     constructor(props) {
         super(props);
 
-        let { products, filters, appliedFilters, noOfItemsToShow } = Stores.getState();
-        this.state = { products, filters, appliedFilters, noOfItemsToShow };
+        this.state = Stores.getState();
 
         this.unSubscribe = null;
 
@@ -63,6 +71,8 @@ export default class App extends Component {
     }
     render() {
         let { filters, appliedFilters, noOfItemsToShow } = this.state;
+        let filteredProducts = this._getFilteredProducts();
+
         return (
             <div>
                 <Header />
@@ -71,8 +81,12 @@ export default class App extends Component {
                     appliedFilters = { appliedFilters }
                 />
                 <Content
-                    products = { this._getFilteredProducts() }
+                    products = { filteredProducts }
                     noOfItemsToShow = { noOfItemsToShow }
+                />
+                <Loader
+                    callback = { this.loadMoreProducts }
+                    hideLoader = { (noOfItemsToShow >= filteredProducts.length) ? true : false }
                 />
                 <Footer />
             </div>

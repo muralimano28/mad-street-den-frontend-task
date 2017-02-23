@@ -9,6 +9,10 @@
     margin: 1em 0.5em;
     background: #FFFFFF;
     box-shadow: 0 1px 3px -1px rgba(0,0,0,.4);
+    min-height: 180px;
+}
+.card:hover {
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
 }
 .card .img-wrapper,
 .card .details {
@@ -35,7 +39,7 @@
     font-size: 1em;
     line-height: 1.125em;
 }
-.card:hover .details h3 {
+.card .details h3:hover {
     color: #2874f0;
 }
 .card .details .sub {
@@ -43,4 +47,47 @@
     margin: 0.5em 0;
     font-size: 0.875em; /* 14px */
     text-transform: capitalize;
+}
+.card .details .score {
+    font-size: 0.75em; /* 12px */
+    line-height: 0.875em; /* 14px */
+    padding: 0.28em 0; /* 4px */
+    text-align: center;
+    width: 4em; /* 48px */
+    color: #FFFFFF;
+    background: #388e3c;
+    border-radius: 3px;
+    margin: 0.667em 0; /* 8px */
+}
+.card .details .score span{
+    vertical-align: middle;
+    margin: 0 4px 0 0;
+}
+.card .details .score img {
+    width: 1em; /* 12px */
+    height: 1em; /* 12px */
+    vertical-align: middle;
+}
+.card .details .price {
+    font-size: 1.125em; /* 18px */
+    line-height: 1.11em; /* 20px */
+    margin: 0.66em 0 0.66em; /* 12px */
+}
+.card .details .btn-grp {
+    margin: 1em 0; /* 16px */
+}
+.card .details .buy-btn {
+    font-size: 0.75em; /* 12px */
+    background: #2874f0;
+    border: none;
+    border-radius: 3px;
+    color: #eff1fa;
+    padding: 8px 12px;
+    outline: none;
+    text-transform: uppercase;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    margin: 8px 0 0;
+}
+.card .details .buy-btn:hover {
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
 }

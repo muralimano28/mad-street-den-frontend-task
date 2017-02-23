@@ -6,6 +6,14 @@
     font-family: 'OpenSans-Bold';
     src: url('../assets/fonts/OpenSans/OpenSans-Bold.ttf');
 }
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('../assets/fonts/OpenSans/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-LightItalic';
+    src: url('../assets/fonts/OpenSans/OpenSans-LightItalic.ttf');
+}
 
 * {
     box-sizing: border-box;
@@ -15,9 +23,8 @@ body {
     background: #f3f3f3;
     font-family: 'OpenSans-Regular', sans-serif;
     color: #333333;
-}
-#root {
-    margin: 0.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 .noul {
     list-style: none;

@@ -12,6 +12,7 @@
     box-shadow: 0 1px 3px -1px rgba(0,0,0,.4);
     font-size: 1rem;
     overflow-y: scroll;
+    margin: 0 0.5rem;
 }
 .sidebar .header {
     padding: 1em;

@@ -52,7 +52,7 @@ export default class Sidebar extends Component {
                         type="checkbox"
                         id={ "filter-" + idx }
                         value={ filter }
-                        onClick={ applyFilter }
+                        onChange={ applyFilter }
                         checked= { checked }
                     />
                     <label htmlFor={ "filter-" + idx } >
