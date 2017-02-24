@@ -3,6 +3,13 @@ import { render } from 'react-dom';
 
 import App from 'containers';
 
+/*
+ * Importing default styles which is required for whole app.
+ */
+
+import './normalize.min.css';
+import './default.css';
+
 render(
     <App />,
     document.getElementById('root')

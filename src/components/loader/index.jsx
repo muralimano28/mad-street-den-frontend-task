@@ -16,21 +16,22 @@ export default class Loader extends Component {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
         );
     }
-    _onScroll() {
+    _whenUserStopsScrolling() {
         // Check if loader dom is visible or not.
         // If it is visible, then request for new page by executing the callback from props.
-        if (this._isDomVisible() && !this.loadingInProgress) {
-            this.timerRef = window.setTimeout(this._completeLoadingNewPage, 250)
+
+        if (this._isDomVisible()) {
             this.props.callback();
-            this.loadingInProgress = true;
         }
+
         // Else do nothing.
     }
-    _completeLoadingNewPage() {
-        if (this.timerRef) {
-            window.clearTimeout(this.timerRef);
+    _onScroll() {
+        if (this.scrollTimerRef) {
+            clearTimeout(this.scrollTimerRef);
         }
-        this.loadingInProgress = false;
+
+        this.scrollTimerRef = window.setTimeout(this._whenUserStopsScrolling, 500);
     }
     constructor(props) {
         super(props);
@@ -38,11 +39,10 @@ export default class Loader extends Component {
         // Binding this to class methods.
         this._isDomVisible = this._isDomVisible.bind(this);
         this._onScroll = this._onScroll.bind(this);
-        this._completeLoadingNewPage = this._completeLoadingNewPage.bind(this);
+        this._whenUserStopsScrolling =  this._whenUserStopsScrolling.bind(this);
 
         this.domNode = null;
-        this.timerRef = null;
-        this.loadingInProgress = false;
+        this.scrollTimerRef = null;
     }
     componentDidMount() {
         // Add scroll listener.

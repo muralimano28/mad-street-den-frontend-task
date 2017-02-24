@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('assets/fonts/OpenSans/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('assets/fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('assets/fonts/OpenSans/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-LightItalic';
+    src: url('assets/fonts/OpenSans/OpenSans-LightItalic.ttf');
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 16px;
+    background: #f3f3f3;
+    font-family: 'OpenSans-Regular', sans-serif;
+    color: #333333;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+label {
+    padding: 0 0 0 0.5em;
+}
+input[type="radio"],
+input[type="checkbox"],
+label {
+    vertical-align: middle;
+}
+.noul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.noul li {
+    margin: 1em 0;
+}
+.hide {
+    display: none !important;
+}
+.close-btn {
+    display: none !important;
+}
+.main-content,
+.quote,
+.loader {
+    margin-left: 15.5rem;
+}
+@media only screen and (max-width: 768px) {
+    .active button.close-btn {
+        color: #FFFFFF;
+        position: absolute;
+        right: 8%;
+        top: 1rem;
+        display: block !important;
+    }
+
+    .main-content,
+    .quote,
+    .loader {
+        margin-left: 0;
+    }
+
+    /* Sort and filter mobile view has same styles */
+    .sort .heading {
+        padding: 1em;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .sort .heading h3 {
+        margin: 0;
+        font-family: 'OpenSans-Bold', 'OpenSans-Regular', sans-serif;
+        display: inline-block;
+        vertical-align: middle;
+        width: 60%;
+    }
+}

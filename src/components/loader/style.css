@@ -18,3 +18,9 @@
     width: 32px;
     height: 32px;
 }
+@media only screen and (max-width: 768px) {
+    .quote,
+    .loader {
+        margin-bottom: 5em;
+    }
+}

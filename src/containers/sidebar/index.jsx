@@ -17,7 +17,7 @@ export default class Sidebar extends Component {
         this.mobileDom = null;
     }
     render() {
-        const { filters, appliedFilters } = this.props;
+        const { filters, appliedFilters, showFilterOptions } = this.props;
         const { showFilterInMobile } = this.state;
 
         const applyFilter = (ev) => {
@@ -64,8 +64,12 @@ export default class Sidebar extends Component {
 
         return (
             <div className="filter-container">
-                <div className={ "mobile-container" + ((showFilterInMobile) ? " active" : "") }>
-                    <button type="button" className="close-btn" onClick={ () => handleFilters(false) }>X</button>
+                <div className={ "mobile-container" + ((showFilterOptions) ? " active" : "") }>
+                    <button
+                        type="button"
+                        className="close-btn"
+                        onClick={ () => this.props.filterHandler("filter", false) }
+                    >X</button>
                     <aside className="sidebar">
                         <div className="header">
                             <h3>Filters</h3>
@@ -78,21 +82,6 @@ export default class Sidebar extends Component {
                             </ul>
                         </div>
                     </aside>
-                </div>
-                <div className="mobile-btns">
-                    <div>
-                        <img src="assets/images/filter.svg" alt="filter-icon" />
-                        <button type="button" className="filter-btn" onClick={ () => handleFilters(true) }>Filter</button>
-                        <img
-                            src="assets/images/filter-applied.svg"
-                            alt="filter-applied"
-                            className = { (appliedFilters.length) ? "" : "hide"}
-                        />
-                    </div>
-                    <div>
-                        <img src="assets/images/sort.svg" alt="sort-icon" />
-                        <button type="button" className="sort-btn">Sort</button>
-                    </div>
                 </div>
             </div>
         );

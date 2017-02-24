@@ -1,0 +1,39 @@
+.mobile-btns {
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .mobile-btns {
+        position: fixed;
+        height: 3rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 2px 34px -4px rgba(0,0,0,.7);
+        display: block;
+        background: #FFFFFF;
+        z-index: 3;
+    }
+    .mobile-btns > div {
+        display: inline-block;
+        vertical-align: top;
+        width: 49.5%;
+        text-align: center;
+        border-left: 1px solid #eaeaea;
+        margin: 0.5em 0;
+    }
+    .mobile-btns img {
+        width: 13px;
+        height: 13px;
+        vertical-align: middle;
+    }
+    .mobile-btns button{
+        font-size: 0.8125em;  /* 13px */
+        padding: 0.615em;
+        text-transform: uppercase;
+        border: none;
+        background: transparent;
+        font-family: 'OpenSans-Bold', 'OpenSans-Regular', sans-serif;
+        outline: none;
+    }
+}

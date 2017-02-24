@@ -21,12 +21,8 @@ import Footer from './footer';
 
 import Loader from 'components/loader';
 
-/*
- * Importing default styles which is required for whole app.
- */
-
-import 'styles/normalize.min.css';
-import 'styles/default.css';
+// Style
+import './style.css';
 
 // Action creators.
 import Actions from 'actions';
@@ -35,18 +31,32 @@ import Actions from 'actions';
 import Stores from 'stores';
 
 export default class App extends Component {
+    filterAndSortHandler(type, value) {
+        if (type === 'filter') {
+            this.setState({ showFilterOptions: value });
+        } else {
+            this.setState({ showSortOptions: value });
+        }
+    }
     _onStoreChange() {
         this.setState(Stores.getState());
     }
     _getFilteredProducts() {
-        const { products, appliedFilters } = this.state;
+        const { products, appliedFilters, sortBy } = this.state;
+
+        let productArr = products;
+
+        if (sortBy !== 'DEFAULT') {
+            productArr = this.state[sortBy];
+        }
+        // console.log("products: ", productArr);
 
         if (appliedFilters.length) {
-            return products.filter((product, idx) => {
+            return productArr.filter((product, idx) => {
                 return (appliedFilters.indexOf(product.cat) >= 0);
             });
         } else {
-            return products;
+            return productArr;
         }
     }
     loadMoreProducts() {
@@ -57,37 +67,88 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = Stores.getState();
+        this.state = {
+            ...Stores.getState(),
+            showFilterOptions: false,
+            showSortOptions: false
+        }
 
         this.unSubscribe = null;
 
         // Binding this to class methods.
         this._onStoreChange = this._onStoreChange.bind(this);
         this._getFilteredProducts = this._getFilteredProducts.bind(this);
+        this.filterAndSortHandler = this.filterAndSortHandler.bind(this);
     }
     componentWillMount() {
         // Make a AJAX call to the server to get data.
         Actions.getProductData();
     }
     render() {
-        let { filters, appliedFilters, noOfItemsToShow } = this.state;
+        let { filters, appliedFilters, noOfItemsToShow, sortBy, showFilterOptions, showSortOptions } = this.state;
         let filteredProducts = this._getFilteredProducts();
 
         return (
             <div>
                 <Header />
+
+                {/* This is sidebar that shows filter options and applied filters */}
                 <Sidebar
                     filters = { filters }
                     appliedFilters = { appliedFilters }
+                    showFilterOptions = { showFilterOptions }
+                    filterHandler = { this.filterAndSortHandler }
                 />
+                {/* =============== */}
+
+                {/* This is the middle content part which displays all products */}
                 <Content
                     products = { filteredProducts }
                     noOfItemsToShow = { noOfItemsToShow }
+                    sortBy = { sortBy }
+                    showSortOptions = { showSortOptions }
+                    sortHandler = { this.filterAndSortHandler }
                 />
+                {/* =============== */}
+
+                {/* This displays filter and sort buttons in mobile view */}
+                <div className="mobile-btns">
+                    <div>
+                        <img src="assets/images/filter.svg" alt="filter-icon" />
+                        <button
+                            type="button"
+                            className="filter-btn"
+                            onClick={ () => this.filterAndSortHandler('filter', true) }
+                        >Filter</button>
+                        <img
+                            src="assets/images/filter-applied.svg"
+                            alt="filter-applied"
+                            className = { (appliedFilters.length) ? "" : "hide"}
+                        />
+                    </div>
+                    <div>
+                        <img src="assets/images/sort.svg" alt="sort-icon" />
+                        <button
+                            type="button"
+                            className="sort-btn"
+                            onClick={ () => this.filterAndSortHandler('sort', true) }
+                        >Sort</button>
+                        <img
+                            src="assets/images/filter-applied.svg"
+                            alt="filter-applied"
+                            className = { (sortBy !== 'DEFAULT') ? "" : "hide"}
+                        />
+                    </div>
+                </div>
+                {/* =============== */}
+
+                {/* This is for infinite scrolling */}
                 <Loader
                     callback = { this.loadMoreProducts }
                     hideLoader = { (noOfItemsToShow >= filteredProducts.length) ? true : false }
                 />
+                {/* =============== */}
+
                 <Footer />
             </div>
         );
