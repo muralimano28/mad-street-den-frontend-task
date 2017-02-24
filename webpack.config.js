@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = (nodeEnv === 'production');
@@ -56,6 +57,9 @@ if (isProd) {
                 comments: false
             }
         }),
+        new copyWebpackPlugin([
+            { from: 'assets/images/*'}
+        ]),
         extractCssToText
     );
 } else {
