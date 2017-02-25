@@ -4,8 +4,8 @@
     "description": "This is a front-end task given to me by mad street den (MSD) during my interview for front-end developer position",
     "main": "index.js",
     "scripts": {
-        "start": "NODE_ENV=development webpack-dev-server --config webpack.config.js",
-        "build": "rm -rf ./dist && NODE_ENV=production webpack",
+        "start": "NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js",
+        "build": "rm -rf ./dist && NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
