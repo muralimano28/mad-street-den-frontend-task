@@ -54,6 +54,6 @@ $ git clone https://github.com/muralimano28/mad-street-den-frontend-task.git && 
   - To create a production build run below command. This will create a dist folder which will contain all production ready files.
   
     ```
-    $ npm build
+    $ npm run build
     ```
     
